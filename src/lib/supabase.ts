@@ -8,8 +8,8 @@
  * Para integração real, crie o projeto em https://supabase.com e cole as chaves.
  */
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const SUPABASE_URL = import.meta.env['VITE_SUPABASE_URL'] as string;
+const SUPABASE_ANON_KEY = import.meta.env['VITE_SUPABASE_ANON_KEY'] as string;
 
 const IS_CONFIGURED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
 

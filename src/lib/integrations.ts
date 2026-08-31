@@ -31,8 +31,8 @@ export interface AppointmentPayload {
 
 /* ─── WHATSAPP ────────────────────────────────────────────────── */
 async function sendWhatsAppText(to: string, text: string) {
-  const token = import.meta.env.VITE_WA_ACCESS_TOKEN as string;
-  const phoneNumberId = import.meta.env.VITE_WA_PHONE_NUMBER_ID as string;
+  const token = import.meta.env['VITE_WA_ACCESS_TOKEN'] as string;
+  const phoneNumberId = import.meta.env['VITE_WA_PHONE_NUMBER_ID'] as string;
 
   if (!token || !phoneNumberId) {
     console.warn("[WA] VITE_WA_ACCESS_TOKEN ou VITE_WA_PHONE_NUMBER_ID não configurados.");
@@ -58,7 +58,7 @@ async function sendWhatsAppText(to: string, text: string) {
 }
 
 export async function notifyAdminWhatsApp(payload: AppointmentPayload) {
-  const adminNumber = import.meta.env.VITE_WA_ADMIN_NUMBER as string;
+  const adminNumber = import.meta.env['VITE_WA_ADMIN_NUMBER'] as string;
   if (!adminNumber) {
     console.warn("[WA] VITE_WA_ADMIN_NUMBER não configurado.");
     return;
@@ -93,7 +93,7 @@ export async function notifyClientWhatsApp(payload: AppointmentPayload) {
 
 /* ─── GOOGLE SHEETS (via webhook n8n / Make) ──────────────────── */
 export async function syncGoogleSheets(payload: AppointmentPayload) {
-  const webhookUrl = import.meta.env.VITE_SHEETS_WEBHOOK_URL as string;
+  const webhookUrl = import.meta.env['VITE_SHEETS_WEBHOOK_URL'] as string;
 
   if (!webhookUrl) {
     console.warn("[Sheets] VITE_SHEETS_WEBHOOK_URL não configurada.");
@@ -131,11 +131,11 @@ export function validateCpf(cpf: string): boolean {
   if (d.length !== 11 || /^(\d)\1+$/.test(d)) return false;
   const calc = (n: number) => {
     let sum = 0;
-    for (let i = 0; i < n; i++) sum += parseInt(d[i]) * (n + 1 - i);
+    for (let i = 0; i < n; i++) sum += parseInt(d[i]!) * (n + 1 - i);
     const r = (sum * 10) % 11;
     return r === 10 || r === 11 ? 0 : r;
   };
-  return calc(9) === parseInt(d[9]) && calc(10) === parseInt(d[10]);
+  return calc(9) === parseInt(d[9]!) && calc(10) === parseInt(d[10]!);
 }
 
 export function formatPhone(phone: string): string {
