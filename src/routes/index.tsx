@@ -1,24 +1,45 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import Intro from "../components/barber/Intro";
+import Navbar from "../components/barber/Navbar";
+import Hero from "../components/barber/Hero";
+import About from "../components/barber/About";
+import Services from "../components/barber/Services";
+import Team from "../components/barber/Team";
+import CTA from "../components/barber/CTA";
+import Location from "../components/barber/Location";
+import Footer from "../components/barber/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const INTRO_SEEN_KEY = "barber_intro_seen";
+
 function Index() {
+  const [showIntro, setShowIntro] = useState(false);
+
+  useEffect(() => {
+    const seen = sessionStorage.getItem(INTRO_SEEN_KEY);
+    if (!seen) {
+      setShowIntro(true);
+      sessionStorage.setItem(INTRO_SEEN_KEY, "1");
+    }
+  }, []);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div style={{ background: "oklch(0.10 0.005 60)" }}>
+      {showIntro && <Intro onDone={() => setShowIntro(false)} />}
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Team />
+        <CTA />
+        <Location />
+      </main>
+      <Footer />
     </div>
   );
 }
