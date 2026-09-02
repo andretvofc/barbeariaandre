@@ -5,6 +5,7 @@ import Navbar from "../components/barber/Navbar";
 import Hero from "../components/barber/Hero";
 import About from "../components/barber/About";
 import Services from "../components/barber/Services";
+import Gallery from "../components/barber/Gallery";
 import Team from "../components/barber/Team";
 import CTA from "../components/barber/CTA";
 import Location from "../components/barber/Location";
@@ -35,6 +36,7 @@ function Index() {
         <Hero />
         <About />
         <Services />
+        <Gallery />
         <Team />
         <CTA />
         <Location />
