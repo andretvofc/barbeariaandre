@@ -218,3 +218,124 @@
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: oklch(0.10 0.005 60); }
 ::-webkit-scrollbar-thumb { background: oklch(0.80 0.12 85 / 30%); border-radius: 2px; }
+
+/* ══════════════════════════════════════════════════════════════
+   PORTFÓLIO — ANDRÉ DEL RASO
+   Paleta: preto, cinza escuro, cinza claro, branco.
+   Destaque sutil em azul acinzentado.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --adr-accent: #7ea8d8;
+  --adr-black: #08090a;
+}
+
+.adr-root {
+  background: var(--adr-black);
+  color: #fafafa;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.adr-root ::selection {
+  background: rgb(255 255 255 / 15%);
+  color: #fff;
+}
+
+.adr-root :focus-visible {
+  outline: 2px solid var(--adr-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.adr-root h1,
+.adr-root h2,
+.adr-root h3 {
+  font-family: inherit;
+}
+
+/* Scroll suave com offset para o header fixo */
+.adr-root section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ─── REVEAL (fade sutil no scroll) ──────────────────────────── */
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.adr-root .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.adr-root .reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adr-root .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .adr-root * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── BOTÕES ─────────────────────────────────────────────────── */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #fafafa;
+  color: #0a0a0a;
+  border: 1px solid #fafafa;
+  transition: background 0.25s ease, border-color 0.25s ease,
+    transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+}
+.btn-accent:hover {
+  background: #fff;
+  border-color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgb(255 255 255 / 12%);
+}
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #e5e5e5;
+  border: 1px solid rgb(255 255 255 / 14%);
+  transition: border-color 0.25s ease, background 0.25s ease,
+    color 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+}
+.btn-ghost:hover {
+  border-color: rgb(255 255 255 / 30%);
+  background: rgb(255 255 255 / 4%);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.btn-ghost:active {
+  transform: translateY(0);
+}
+
+/* ─── LINHA FINA DE SEÇÃO ────────────────────────────────────── */
+.adr-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 10%), transparent);
+}
